@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  oidc:
+    image: api-oauth/oidc
+    ports:
+      - "3000:3000"
+    environment:
+      CLIENT_ID: "demo_app"
+      CLIENT_SECRET: "password"
+      CALLBACK_URI: "http://demo-api:8080"
+

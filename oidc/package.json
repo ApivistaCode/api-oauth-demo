@@ -1,0 +1,19 @@
+{
+  "name": "oidc",
+  "version": "1.0.0",
+  "main": "build/index.js",
+  "license": "MIT",
+  "scripts": {
+    "build": "rimraf dist && tsc -p tsconfig.json",
+    "build:image": "docker build -t api-oauth/oidc .",
+    "start:dev": "tsc-watch -p tsconfig.json --onSuccess \"node dist/index.js\"",
+    "start": "node dist/index.js"
+  },
+  "dependencies": {
+    "dotenv": "^8.1.0",
+    "oidc-provider": "^6.10.0",
+    "rimraf": "^3.0.0",
+    "tsc-watch": "^4.0.0",
+    "typescript": "^3.6.3"
+  }
+}
