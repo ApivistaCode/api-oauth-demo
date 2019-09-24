@@ -20,4 +20,4 @@ USER app
 
 WORKDIR /app
 
-CMD ["node","main.js"]
+CMD ["node","index.js"]
