@@ -11,8 +11,14 @@
     "target": "es6",
     "sourceMap": true,
     "allowJs": true,
+    "resolveJsonModule": true,
     "outDir": "dist",
-    "lib": ["es7"]
+    "lib": ["es7"],
+    "rootDir": "src"
   },
+  "include": [
+    "**/*.ts",
+    "**/db.json"
+  ],
   "exclude": ["node_modules", "dist"]
 }

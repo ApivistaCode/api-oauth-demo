@@ -10,3 +10,8 @@ services:
       CLIENT_SECRET: "password"
       CALLBACK_URI: "http://demo-api:8080"
 
+  demo-api:
+    image: api-oauth/demo-api
+    ports:
+      - "8000:3000"
+
