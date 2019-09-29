@@ -2,6 +2,7 @@ import * as jsonServer from 'json-server';
 
 import * as path from 'path';
 
+const port = process.env.PORT || 9000;
 const server = jsonServer.create();
 const router = jsonServer.router(path.join(__dirname, 'db.json'));
 
@@ -12,8 +13,7 @@ import { auth } from './middleware';
 
 server.use(middlewares);
 server.use(auth);
-
-server.use(router);
-server.listen(3000, () => {
-  console.log("JSON server is listening on port 3000");
+server.use('/v1',router);
+server.listen(port, () => {
+  console.log("JSON server is listening on port " + port );
 });

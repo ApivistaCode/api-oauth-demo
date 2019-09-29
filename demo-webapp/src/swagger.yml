@@ -1,38 +1,29 @@
 openapi: "3.0.0"
 info:
   version: 1.0.0
-  title: Swagger Petstore
-  license:
-    name: MIT
+  title: Three Hour Boat Tour Travel Insurance API
+  description:
+    Founded in 1965, we have reliably provided travel insurance to our customers.  We pride ourselves in making our policies affordable to everyone.  Whether you are a  movie star, a professor, or just randomly end up on a boat tour, you can enjoy the sites with the peace of mind that we have you covered.
+
 servers:
-  - url: http://petstore.swagger.io/v1
+  - url: http://localhost:9000/v1
 paths:
-  /pets:
+
+  /policies:
     get:
-      summary: List all pets
-      operationId: listPets
+      summary: List all policies
       tags:
-        - pets
-      parameters:
-        - name: limit
-          in: query
-          description: How many items to return at one time (max 100)
-          required: false
-          schema:
-            type: integer
-            format: int32
+        - policies
+      security:
+        - api_auth:
+          - "read:policies"
       responses:
         '200':
-          description: A paged array of pets
-          headers:
-            x-next:
-              description: A link to the next page of responses
-              schema:
-                type: string
+          description: A array of policies
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Pets"
+                $ref: "#/components/schemas/Policies"
         default:
           description: unexpected error
           content:
@@ -40,10 +31,19 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
     post:
-      summary: Create a pet
-      operationId: createPets
+      summary: Add a policy
       tags:
-        - pets
+        - policies
+      security:
+        - api_auth:
+          - "create:policies"
+      parameters:
+        - name: policy
+          in: body
+          required: true
+          description: The new policy information
+          schema:
+            $ref: "#/components/schemas/Policy"
       responses:
         '201':
           description: Null response
@@ -53,17 +53,19 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-  /pets/{petId}:
+  /policies/{policyId}:
     get:
-      summary: Info for a specific pet
-      operationId: showPetById
+      summary: Info for a specific policy
       tags:
-        - pets
+        - policies
+      security:
+        - api_auth:
+          - "read:policies"
       parameters:
-        - name: petId
+        - name: policyId
           in: path
           required: true
-          description: The id of the pet to retrieve
+          description: The id of the policy to retrieve
           schema:
             type: string
       responses:
@@ -72,44 +74,171 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Pet"
+                $ref: "#/components/schemas/Policy"
         default:
           description: unexpected error
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
+  /agents:
+    get:
+      summary: List all insurance agents
+      tags:
+        - agents
+      security:
+        - api_auth:
+          - "read:agents"
+      responses:
+        '200':
+          description: A array of agents
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Agents"
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    post:
+      summary: Add an agent
+      tags:
+        - agents
+      security:
+        - api_auth:
+          - "create:agents"
+      parameters:
+        - name: agent
+          in: body
+          required: true
+          description: The new agent information
+          schema:
+            $ref: "#/components/schemas/Agent"
+      responses:
+        '201':
+          description: Null response
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    delete:
+      summary: Delete a specific agent
+      tags:
+        - agents
+      security:
+        - api_auth:
+          - "remove:agents"
+      parameters:
+        - name: agentId
+          in: path
+          required: true
+          description: The id of the agent to remove
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Expected response to a valid request
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /agents/{agentId}:
+    get:
+      summary: Info for a specific policy
+      tags:
+        - agents
+      security:
+        - api_auth:
+          - "read:agents"
+      parameters:
+        - name: agentId
+          in: path
+          required: true
+          description: The id of the agent to retrieve
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Expected response to a valid request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Agent"
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
 components:
   securitySchemes:
-    pizza_auth:
+    api_auth:
       type: oauth2
       flows:
         authorizationCode:
-          authorizationUrl: "http://localhost:3000/auth"
-          tokenUrl: "http://localhost:3000/token"
-          refreshUrl: "http://localhost:3000/refresh"
+          authorizationUrl: "http://localhost:8000/auth"
+          tokenUrl: "http://localhost:8000/token"
+          refreshUrl: "http://localhost:8000/refresh"
           scopes:
             openid: available default scope
             offline_access: available default scope
+            read:policies: view policy information
+            create:policies: create insurance policies
+            read:agents: view agent information
+            create:agents: add new agents
+            remove:agents: remove agents
 
   schemas:
-    Pet:
+    Policy:
       type: object
       required:
         - id
         - name
       properties:
         id:
-          type: integer
-          format: int64
+          type: string
+          format: uuid
         name:
           type: string
-        tag:
+        description:
           type: string
-    Pets:
+        premium:
+          type: int32
+        agentId:
+          type: string
+          format: uuid
+
+    Policies:
       type: array
       items:
-        $ref: "#/components/schemas/Pet"
+        $ref: "#/components/schemas/Policy"
+
+    Agent:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        firstName:
+          type: string
+        lastName:
+          type: string
+        region:
+          type: string
+
+    Agents:
+      type: array
+      items:
+        $ref: "#/components/schemas/Agent"
+
     Error:
       type: object
       required:

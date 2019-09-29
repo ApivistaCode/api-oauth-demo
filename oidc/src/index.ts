@@ -1,25 +1,30 @@
 import { Provider, ResponseType } from 'oidc-provider';
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8000;
 
 const clients = [
   {
     client_id: "worker_app",
     client_secret: "password",
     grant_types: ["client_credentials", "authorization_code"],
-    redirect_uris: ["http://localhost:8081/oauth2-redirect.html"],
+    redirect_uris: ["http://localhost:8080/oauth2-redirect.html"],
   },
   {
     client_id: "web_app",
     client_secret: "password",
     grant_types: ["authorization_code"],
-    redirect_uris: ["http://localhost:8081/oauth2-redirect.html"],
+    redirect_uris: ["http://localhost:8080/oauth2-redirect.html"],
   }
 ]
 
 const scopes = [
   "openid",
-  "offline_access"
+  "offline_access",
+  "read:policies",
+  "create:policies",
+  "read:agents",
+  "create:agents",
+  "remove:agents"
 ]
 
 const configuration = {
@@ -45,5 +50,5 @@ const configuration = {
 const oidc = new Provider('http://localhost:' + port, configuration);
 
 const server = oidc.listen(port, () => {
-  console.log('oidc-provider listening on port 3000, check http://localhost:3000/.well-known/openid-configuration');
+  console.log('oidc-provider listening on port ' + port +', check http://localhost:'+ port + '/.well-known/openid-configuration');
 });

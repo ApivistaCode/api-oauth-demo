@@ -7,7 +7,7 @@ const oidc: AxiosInstance = axios.default.create({
   baseURL: oidcUri,
 });
 
-const apiUri: string = "http://localhost:3000/";
+const apiUri: string = "http://localhost:8080/v1";
 const api: AxiosInstance = axios.default.create({
   baseURL: apiUri
 })
@@ -18,7 +18,7 @@ const request_token = async () =>{
 
   const data = qs.stringify({
     grant_type: 'client_credentials',
-    client_id: 'demo_app',
+    client_id: 'worker_app',
     client_secret: 'password'
   })
   return await oidc.post(token_endpoint, data,
