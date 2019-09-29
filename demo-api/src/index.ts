@@ -8,11 +8,12 @@ const router = jsonServer.router(path.join(__dirname, 'db.json'));
 
 const middlewares = jsonServer.defaults();
 
-import { auth } from './middleware';
+import { auth, scopes} from './middleware';
 
 
 server.use(middlewares);
 server.use(auth);
+server.use(scopes);
 server.use('/v1',router);
 server.listen(port, () => {
   console.log("JSON server is listening on port " + port );

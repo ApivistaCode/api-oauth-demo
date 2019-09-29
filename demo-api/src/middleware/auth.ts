@@ -35,12 +35,13 @@ export const auth = async (req, res, next) => {
     const isAuthorized = jwt.verify(token, pem);
 
     if (isAuthorized) {
+      req.token = token
       next()
     } else {
      res.sendStatus(401)
     }
   } catch(error) {
-    console.log(error);
+    console.error(error);
     res.sendStatus(401)
   }
 }

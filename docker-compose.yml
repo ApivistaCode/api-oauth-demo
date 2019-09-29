@@ -12,4 +12,3 @@ services:
     image: api-oauth/demo-api
     ports:
       - "9000:9000"
-

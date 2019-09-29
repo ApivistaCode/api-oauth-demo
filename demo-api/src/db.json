@@ -1,5 +1,8 @@
 {
   "policies": [
     { "id": 1, "title": "json-server", "author": "typicode" }
+  ],
+  "agents": [
+    { "id": 1, "title": "json-server", "author": "typicode" }
   ]
 }
