@@ -4,6 +4,7 @@ import * as jwt from 'jsonwebtoken';
 
 export const auth = async (req, res, next) => {
   try {
+    const authURL = process.env.AUTH_URL || "http://localhost:8000"
 
     const authorizationHeader = req.headers.authorization;
 
@@ -24,7 +25,7 @@ export const auth = async (req, res, next) => {
 
     // create public key using JWKS
     // search for the kid that matches what's in the token
-    const jwks = await axios.default.get("http://localhost:8000/jwks")
+    const jwks = await axios.default.get(authURL + "/jwks")
     const jwk = jwks.data.keys[0];
     const pem = jwkToPem(jwk);
     console.log(pem);

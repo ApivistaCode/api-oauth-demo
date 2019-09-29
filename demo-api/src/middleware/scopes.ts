@@ -13,12 +13,14 @@ export const scopes = async (req, res, next) => {
 
     let match = null;
     reqScopes.forEach( ( reqScope ) => {
-      const acls = scopesACL[reqScope];
-      if(acls) {
-        match = acls.find( ( acl ) => {
-          return acl.method == req.method &&
-            req.url.match(new RegExp(acl.url))
-        })
+      if(!match) {
+        const acls = scopesACL[reqScope];
+        if(acls) {
+          match = acls.find( ( acl ) => {
+            return acl.method == req.method &&
+              req.url.match(new RegExp(acl.url))
+          })
+        }
       }
     })
 

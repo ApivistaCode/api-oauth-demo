@@ -10,5 +10,14 @@ services:
 
   demo-api:
     image: api-oauth/demo-api
+    environment:
+      AUTH_URL: "http://oidc:8000"
     ports:
       - "9000:9000"
+
+  demo-webapp:
+    image: nginx:1.17-alpine
+    ports:
+      - "8080:80"
+    volumes:
+      - "./demo-webapp/src:/usr/share/nginx/html"

@@ -2,7 +2,7 @@ export const scopesACL = {
   "read:policies": [
     {
       method: "GET",
-      url: "\/policies$"
+      url: "\/policies"
     },
     {
       method: "GET",
