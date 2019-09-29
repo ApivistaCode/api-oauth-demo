@@ -1,17 +1,19 @@
 {
-  "name": "oidc",
+  "name": "demo-worker",
   "version": "1.0.0",
   "main": "build/index.js",
   "license": "MIT",
   "scripts": {
     "build": "rimraf dist && tsc -p tsconfig.json",
-    "build:image": "docker build -t api-oauth/demo-api .",
+    "build:image": "docker build -t api-oauth/demo-worker .",
     "start:dev": "tsc-watch -p tsconfig.json --onSuccess \"node dist/index.js\"",
     "start": "node dist/index.js"
   },
   "dependencies": {
+    "axios": "^0.19.0",
     "dotenv": "^8.1.0",
     "oidc-provider": "^6.10.0",
+    "qs": "^6.9.0",
     "rimraf": "^3.0.0",
     "tsc-watch": "^4.0.0",
     "typescript": "^3.6.3"

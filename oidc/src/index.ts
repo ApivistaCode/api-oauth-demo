@@ -1,30 +1,45 @@
-import { Provider } from 'oidc-provider';
-import { config } from 'dotenv';
-
-config();
+import { Provider, ResponseType } from 'oidc-provider';
 
 const port = process.env.PORT || 3000;
 
+const clients = [
+  {
+    client_id: "worker_app",
+    client_secret: "password",
+    grant_types: ["client_credentials", "authorization_code"],
+    redirect_uris: ["http://localhost:8081/oauth2-redirect.html"],
+  },
+  {
+    client_id: "web_app",
+    client_secret: "password",
+    grant_types: ["authorization_code"],
+    redirect_uris: ["http://localhost:8081/oauth2-redirect.html"],
+  }
+]
+
+const scopes = [
+  "openid",
+  "offline_access"
+]
+
 const configuration = {
   features: {
-    devInteractions: {
-      enabled: true
-    },
-    registration: {
-      enabled: false
-    },
     revocation: {
       enabled: true
     },
-    sessionManagement: {
-      enabled: false
-    }
+    introspection: {
+      enabled: true
+    },
+    clientCredentials: {
+      enabled: true
+    },
   },
-  clients : [{
-    client_id: process.env.CLIENT_ID,
-    client_secret: process.env.CLIENT_SECRET,
-    redirect_uris: [process.env.REDIRECT_URI]
-  }]
+  formats: {
+    AccessToken: "jwt" as "jwt",
+    ClientCredentials: "jwt" as "jwt",
+  },
+  clients: clients,
+  scopes: scopes
 };
 
 const oidc = new Provider('http://localhost:' + port, configuration);

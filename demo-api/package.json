@@ -1,5 +1,5 @@
 {
-  "name": "oidc",
+  "name": "demo-api",
   "version": "1.0.0",
   "main": "build/index.js",
   "license": "MIT",
@@ -11,8 +11,11 @@
   },
   "dependencies": {
     "@types/node": "^12.7.5",
+    "axios": "^0.19.0",
     "dotenv": "^8.1.0",
     "json-server": "^0.15.1",
+    "jsonwebtoken": "^8.5.1",
+    "jwk-to-pem": "^2.0.1",
     "nodemon": "^1.19.2",
     "rimraf": "^3.0.0",
     "tsc-watch": "^4.0.0",

@@ -6,11 +6,10 @@
   "scripts": {
     "build": "rimraf dist && tsc -p tsconfig.json",
     "build:image": "docker build -t api-oauth/oidc .",
-    "start:dev": "tsc-watch -p tsconfig.json --onSuccess \"node dist/index.js\"",
+    "start:dev": "DEBUG=oidc-provider:* tsc-watch -p tsconfig.json --onSuccess \"node dist/index.js\"",
     "start": "node dist/index.js"
   },
   "dependencies": {
-    "dotenv": "^8.1.0",
     "oidc-provider": "^6.10.0",
     "rimraf": "^3.0.0",
     "tsc-watch": "^4.0.0",

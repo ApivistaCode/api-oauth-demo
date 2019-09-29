@@ -4,14 +4,12 @@ services:
   oidc:
     image: api-oauth/oidc
     ports:
-      - "3000:3000"
+      - "8000:3000"
     environment:
-      CLIENT_ID: "demo_app"
-      CLIENT_SECRET: "password"
-      CALLBACK_URI: "http://demo-api:8080"
+      DEBUG: "oidc-provider:*"
 
   demo-api:
     image: api-oauth/demo-api
     ports:
-      - "8000:3000"
+      - "8080:3000"
 

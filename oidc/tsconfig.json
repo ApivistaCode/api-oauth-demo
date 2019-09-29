@@ -9,10 +9,15 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "target": "es6",
+    "resolveJsonModule": true,
     "sourceMap": true,
     "allowJs": true,
     "outDir": "dist",
     "lib": ["es7"]
   },
+  "include": [
+    "**/*.ts",
+    "**/db.json"
+  ],
   "exclude": ["node_modules", "dist"]
 }
