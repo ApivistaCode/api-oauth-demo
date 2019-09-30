@@ -37,13 +37,13 @@ paths:
       security:
         - api_auth:
           - "create:policies"
-      parameters:
-        - name: policy
-          in: body
-          required: true
-          description: The new policy information
-          schema:
-            $ref: "#/components/schemas/Policy"
+      requestBody:
+        required: true
+        description: The new policy information
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Policy"
       responses:
         '201':
           description: Null response
@@ -53,6 +53,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
+
   /policies/{policyId}:
     get:
       summary: Info for a specific policy
@@ -109,39 +110,16 @@ paths:
       security:
         - api_auth:
           - "create:agents"
-      parameters:
-        - name: agent
-          in: body
-          required: true
-          description: The new agent information
-          schema:
-            $ref: "#/components/schemas/Agent"
+      requestBody:
+        required: true
+        description: The new agent information
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Agent"
       responses:
         '201':
           description: Null response
-        default:
-          description: unexpected error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-    delete:
-      summary: Delete a specific agent
-      tags:
-        - agents
-      security:
-        - api_auth:
-          - "remove:agents"
-      parameters:
-        - name: agentId
-          in: path
-          required: true
-          description: The id of the agent to remove
-          schema:
-            type: string
-      responses:
-        '200':
-          description: Expected response to a valid request
         default:
           description: unexpected error
           content:
@@ -177,6 +155,29 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
+    delete:
+      summary: Delete a specific agent
+      tags:
+        - agents
+      security:
+        - api_auth:
+          - "remove:agents"
+      parameters:
+        - name: agentId
+          in: path
+          required: true
+          description: The id of the agent to remove
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Expected response to a valid request
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
 
 components:
   securitySchemes:
@@ -204,14 +205,15 @@ components:
         - name
       properties:
         id:
-          type: string
-          format: uuid
+          type: number
+          format: int32
         name:
           type: string
         description:
           type: string
         premium:
-          type: int32
+          type: number
+          format: int32
         agentId:
           type: string
           format: uuid
@@ -225,8 +227,8 @@ components:
       type: object
       properties:
         id:
-          type: string
-          format: uuid
+          type: number
+          format: int32
         firstName:
           type: string
         lastName:

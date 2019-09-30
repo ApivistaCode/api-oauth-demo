@@ -1,6 +1,6 @@
-import * as jwkToPem from 'jwk-to-pem';
-import * as axios from 'axios';
-import * as jwt from 'jsonwebtoken';
+import * as jwkToPem from "jwk-to-pem";
+import * as axios from "axios";
+import * as jwt from "jsonwebtoken";
 
 export const auth = async (req, res, next) => {
   try {
@@ -23,8 +23,8 @@ export const auth = async (req, res, next) => {
     }
 
 
-    // create public key using JWKS
-    // search for the kid that matches what's in the token
+    // create decryption key using JWKS
+    // search for the kid that matches what"s in the token
     const jwks = await axios.default.get(authURL + "/jwks")
     const jwk = jwks.data.keys[0];
     const pem = jwkToPem(jwk);
