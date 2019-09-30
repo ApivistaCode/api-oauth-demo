@@ -204,15 +204,15 @@ components:
         - name
       properties:
         id:
-          type: number
-          format: int32
+          type: string
+          format: uuid
         name:
           type: string
         description:
           type: string
         premium:
           type: number
-          format: int32
+          format: float
         agentId:
           type: string
           format: uuid
@@ -226,8 +226,8 @@ components:
       type: object
       properties:
         id:
-          type: number
-          format: int32
+          type: string
+          format: uuid
         firstName:
           type: string
         lastName:
