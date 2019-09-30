@@ -3,7 +3,7 @@ import * as faker from 'faker';
 const policy = (agents: Array<any>) => {
   return {
     id: faker.random.uuid(),
-    name: faker.commerce.productAdjective() + " " + faker.commerce.product() + " Policy",
+    name: faker.commerce.productName() + " Policy",
     description: faker.lorem.paragraph(),
     premium: faker.commerce.price(),
     agentId: faker.random.arrayElement(agents.map( agent => agent.id))
