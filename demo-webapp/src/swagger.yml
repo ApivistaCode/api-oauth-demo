@@ -15,7 +15,7 @@ paths:
       tags:
         - policies
       security:
-        - api_auth:
+        - openId:
           - "read:policies"
       responses:
         '200':
@@ -185,12 +185,11 @@ components:
       type: oauth2
       flows:
         authorizationCode:
-          authorizationUrl: "http://localhost:8000/auth"
+          authorizationUrl: "http://localhost:8000/auth?prompt=consent"
           tokenUrl: "http://localhost:8000/token"
           refreshUrl: "http://localhost:8000/refresh"
           scopes:
-            openid: available default scope
-            offline_access: available default scope
+            offline_access: Required for requesting refresh tokens
             read:policies: view policy information
             create:policies: create insurance policies
             read:agents: view agent information
@@ -252,3 +251,4 @@ components:
           format: int32
         message:
           type: string
+

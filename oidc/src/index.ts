@@ -12,13 +12,12 @@ const clients = [
   {
     client_id: "web_app",
     client_secret: "password",
-    grant_types: ["authorization_code"],
+    grant_types: ["authorization_code", "refresh_token"],
     redirect_uris: ["http://localhost:8080/oauth2-redirect.html"],
   }
 ]
 
 const scopes = [
-  "openid",
   "offline_access",
   "read:policies",
   "create:policies",
