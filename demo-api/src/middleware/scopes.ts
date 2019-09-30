@@ -27,6 +27,6 @@ export const scopes = async (req, res, next) => {
     }
   } catch (error) {
     console.error(error);
-    res.sendStatus(401);
+    res.sendStatus(500);
   }
 }

@@ -15,7 +15,7 @@ paths:
       tags:
         - policies
       security:
-        - openId:
+        - api_auth:
           - "read:policies"
       responses:
         '200':

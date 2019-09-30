@@ -14,8 +14,8 @@ const middlewares = jsonServer.defaults();
 
 
 server.use(middlewares);
-//server.use(auth);
-//server.use(scopes);
+server.use(auth);
+server.use(scopes);
 server.use('/v1',router);
 server.listen(port, () => {
   console.log("JSON server is listening on port " + port );

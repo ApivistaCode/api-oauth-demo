@@ -7,7 +7,7 @@ export const auth = async (req, res, next) => {
     const authURL = process.env.AUTH_URL || "http://localhost:8000"
 
     const authorizationHeader = req.headers.authorization;
-
+    console.log(authURL);
     // check for header
     if(!authorizationHeader) {
       res.sendStatus(401);
@@ -34,7 +34,6 @@ export const auth = async (req, res, next) => {
     // validate token
     const token: string = bearerToken[1];
     const isAuthorized = jwt.verify(token, pem);
-
     if (isAuthorized) {
       req.token = token
       next()
@@ -43,6 +42,6 @@ export const auth = async (req, res, next) => {
     }
   } catch(error) {
     console.error(error);
-    res.sendStatus(401)
+    res.sendStatus(500)
   }
 }
