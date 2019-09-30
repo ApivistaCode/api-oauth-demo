@@ -1,0 +1,13 @@
+{
+  "name": "demo-webapp",
+  "version": "1.0.0",
+  "main": "src/index.js",
+  "license": "MIT",
+  "scripts": {
+    "build:image": "docker build -t api-oauth/jwtio .",
+    "start:dev": "http-server src"
+  },
+  "dependencies": {
+    "http-server": "^0.11.1"
+  }
+}

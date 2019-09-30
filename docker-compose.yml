@@ -21,3 +21,8 @@ services:
       - "8080:80"
     volumes:
       - "./demo-webapp/src:/usr/share/nginx/html"
+
+  jwtio:
+    image: api-oauth/jwtio
+    ports:
+      - "9090:80"

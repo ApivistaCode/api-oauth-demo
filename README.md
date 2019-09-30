@@ -1,11 +1,8 @@
 # Securing APIs with oAuth2
 
-## Introduction to oAuth2 and OpenID
+## Introduction to oAuth2
 
 - oAuth2 standard for managing token access to resources
-- OpenId standard for managing user identity
-
-## oAuth2 Flows
 
 ### Know the Actors
 - Resource Owner: end user
@@ -18,14 +15,25 @@
 - Credentials Flow: used when the client owns the resource. ie server to server interactions
 - Authorization Code Flow: used when the client is a webapp
 
-### Show the Examples
+## Demo Apps
+-  oidc
+-  demo-api
+-  demo-worker
+-  demo-webapp
+-  docker-compose
 
-### The Flows
-## Client Credentials flow
+## The Flows
+### Client Credentials flow
+-- Walk through the flow
+-- show flow with client demo
+-- auth.ts middleware
+-- Discuss bearer token, jwt, jwks
+--- Show the jwt.io debugger
+--- using RS256 instead of HS256
 
--- Discuss jwt, jwks
-
-## Authorization Code Flow
-
--- Discuss openid vs access token
+### Authorization Code Flow
+-- Walk through the flow
+-- Show flow with swagger ui
+-- scopes.ts
 -- Discuss scopes
+

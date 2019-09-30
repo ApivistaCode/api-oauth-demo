@@ -5,10 +5,6 @@ export const scopes = async (req, res, next) => {
   try{
     const payload = jwt.decode(req.token);
 
-    console.log(payload);
-    console.log(req.method);
-    console.log(req.url);
-
     const reqScopes = payload.scope.split(" ");
 
     let match = null;
