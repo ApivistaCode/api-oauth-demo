@@ -13,7 +13,7 @@
     "axios": "^0.21.1",
     "dotenv": "^8.1.0",
     "oidc-provider": "^6.10.0",
-    "qs": "^6.9.0",
+    "qs": "^6.9.7",
     "rimraf": "^3.0.0",
     "tsc-watch": "^4.0.0",
     "typescript": "^3.6.3"
